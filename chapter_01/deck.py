@@ -3,6 +3,8 @@ from random import choice
 
 Card = collections.namedtuple('Card', ['rank', 'suit'])
 
+SUIT_VALUES = dict(spades=3, hearts=2, diamonds=1, clubs=0)
+
 
 class FrenchDeck:
     ranks = [str(n) for n in range(2, 11)] + list('JQKA')
@@ -37,3 +39,12 @@ print(f"First three cards: {deck[:3]}")
 
 # Pick only the Aces
 print(f"Aces: {deck[12::13]}")
+
+
+# Sorting
+def spades_high(card):
+    rank_value = FrenchDeck.ranks.index(card.rank)
+    return rank_value * len(SUIT_VALUES) + SUIT_VALUES[card.suit]
+
+
+print(f"Sorted deck: {sorted(deck, key=spades_high)}")
